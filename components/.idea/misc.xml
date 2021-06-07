@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/EntityHandler/pom.xml" />
+        <option value="$PROJECT_DIR$/Server/pom.xml" />
+        <option value="$PROJECT_DIR$/NetworkConnection/pom.xml" />
+        <option value="$PROJECT_DIR$/DatabaseHandler/pom.xml" />
+        <option value="$PROJECT_DIR$/constData/pom.xml" />
+        <option value="$PROJECT_DIR$/MessageHandler/pom.xml" />
+        <option value="$PROJECT_DIR$/EventHandler/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

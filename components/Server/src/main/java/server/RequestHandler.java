@@ -1,3 +1,8 @@
-public interface RequestHandler {
-    void handle(String request);
+package server;
+
+import networkConnection.messageHandler.MessageConsumer;
+
+@FunctionalInterface
+public interface RequestHandler extends MessageConsumer {
+
 }

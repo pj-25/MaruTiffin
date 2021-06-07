@@ -1,6 +1,19 @@
-import java.net.Socket;
+package server;
+
+import networkConnection.SocketConnection;
+
 import java.util.HashMap;
 
-public class ClientConnectionsHandler extends HashMap<String, ServeClient> {
+public class ClientConnectionsHandler extends HashMap<String, SocketConnection> {
+    public void closeAll(){
+        for(SocketConnection socketConnection:values()){
+            if(socketConnection.isConnected()){
+                try{
+                    socketConnection.getSocket().close();
+                }catch (Exception ignore){
+                }
+            }
+        }
+    }
 
 }

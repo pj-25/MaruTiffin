@@ -3,8 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DatabaseHandler/DatabaseHandler.iml" filepath="$PROJECT_DIR$/DatabaseHandler/DatabaseHandler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EntityHandler/EntityHandler.iml" filepath="$PROJECT_DIR$/EntityHandler/EntityHandler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EventHandler/EventHandler.iml" filepath="$PROJECT_DIR$/EventHandler/EventHandler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MessageHandler/MessageHandler.iml" filepath="$PROJECT_DIR$/MessageHandler/MessageHandler.iml" />
       <module fileurl="file://$PROJECT_DIR$/NetworkConnection/NetworkConnection.iml" filepath="$PROJECT_DIR$/NetworkConnection/NetworkConnection.iml" />
       <module fileurl="file://$PROJECT_DIR$/Server/Server.iml" filepath="$PROJECT_DIR$/Server/Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/constData/constData.iml" filepath="$PROJECT_DIR$/constData/constData.iml" />
     </modules>
   </component>
 </project>
