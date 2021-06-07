@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="DatabaseHandler" target="1.5" />
+      <module name="NetworkConnection" target="11" />
+      <module name="ServerApp" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
