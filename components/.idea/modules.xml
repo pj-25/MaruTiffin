@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DatabaseHandler/DatabaseHandler.iml" filepath="$PROJECT_DIR$/DatabaseHandler/DatabaseHandler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MaruTiffinApp.iml" filepath="$PROJECT_DIR$/.idea/modules/MaruTiffinApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/NetworkConnection/NetworkConnection.iml" filepath="$PROJECT_DIR$/NetworkConnection/NetworkConnection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Server/Server.iml" filepath="$PROJECT_DIR$/Server/Server.iml" />
     </modules>
   </component>
 </project>

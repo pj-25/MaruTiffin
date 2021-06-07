@@ -1,3 +1,5 @@
+import networkConnection.SocketConnection;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -53,8 +55,10 @@ public class Server {
         close();
     }
 
-    private void createClientConnection(Socket cSock) {
-        NetworkConnection
+    private void createClientConnection(Socket cSock) throws IOException{
+        SocketConnection socketConnection = new SocketConnection(cSock, (data)->{
+
+        });
     }
 
     public void close(){
