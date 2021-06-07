@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Server" />
-        <module name="MessageHandler" />
         <module name="DatabaseHandler" />
         <module name="NetworkConnection" />
-        <module name="EventHandler" />
         <module name="constData" />
         <module name="EntityHandler" />
       </profile>

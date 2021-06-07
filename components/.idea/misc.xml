@@ -8,8 +8,6 @@
         <option value="$PROJECT_DIR$/NetworkConnection/pom.xml" />
         <option value="$PROJECT_DIR$/DatabaseHandler/pom.xml" />
         <option value="$PROJECT_DIR$/constData/pom.xml" />
-        <option value="$PROJECT_DIR$/MessageHandler/pom.xml" />
-        <option value="$PROJECT_DIR$/EventHandler/pom.xml" />
       </list>
     </option>
   </component>
