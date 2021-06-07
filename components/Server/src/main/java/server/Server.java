@@ -27,6 +27,9 @@ public class Server implements RequestHandler, ServeClient {
         this(serverPort, null);
     }
 
+    public Server(RequestHandler requestHandler) throws IOException{
+        this(SERVER_PORT, requestHandler);
+    }
 
     public Server() throws IOException{
         this(SERVER_PORT, null);
@@ -106,7 +109,6 @@ public class Server implements RequestHandler, ServeClient {
         }catch (IOException ignore){
         }
     }
-
 
 
     @Override

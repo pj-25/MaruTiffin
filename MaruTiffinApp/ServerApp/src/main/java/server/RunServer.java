@@ -1,5 +1,7 @@
 package server;
 
+import services.ServeRequest;
+
 import java.io.IOException;
 
 public class RunServer {
@@ -12,9 +14,9 @@ public class RunServer {
 
             Server serverApp;
             if(s.length == 1){
-                serverApp = new Server(Integer.parseInt(s[0]));
+                serverApp = new Server(Integer.parseInt(s[0]), new ServeRequest());
             }else {
-                serverApp = new Server();
+                serverApp = new Server(new ServeRequest());
             }
             serverApp.start();
 
