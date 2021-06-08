@@ -7,7 +7,7 @@ import networkConnection.eventHandler.EventType;
 import java.util.ArrayList;
 
 public class MessageFormatHandler {
-    final private static MessageDelimiter DEFAULT_DELIMITER = MessageDelimiter.ENTITY_ATTRIBUTES_DELIMITER;
+    final private static MessageDelimiter DEFAULT_DELIMITER = MessageDelimiter.OBJ_ATTRIBUTES_DELIMITER;
 
     public static String encode(MessageDelimiter sep, String... msgData){
         StringBuilder msg = new StringBuilder(msgData[0]);
@@ -44,7 +44,7 @@ public class MessageFormatHandler {
         if(entities!=null && entities.size()>0 ){
             StringBuilder bookingData = new StringBuilder(entities.get(0).toString());
             for(int i=1;i<entities.size();i++){
-                bookingData.append(MessageDelimiter.ENTITY_LIST_DELIMITER).append(MessageFormatHandler.encode(entities.get(i).toString()));
+                bookingData.append(MessageDelimiter.OBJ_LIST_DELIMITER).append(MessageFormatHandler.encode(entities.get(i).toString()));
             }
             return bookingData.toString();
         }

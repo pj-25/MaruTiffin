@@ -5,8 +5,8 @@ public enum MessageDelimiter {
     REQUEST_TYPE_DELIMITER("/"),
     RESPONSE_TYPE_DELIMITER("~"),
     EVENT_TYPE_DELIMITER(">"),
-    ENTITY_ATTRIBUTES_DELIMITER(";"),
-    ENTITY_LIST_DELIMITER(",")
+    OBJ_ATTRIBUTES_DELIMITER(";"),
+    OBJ_LIST_DELIMITER(",")
     ;
     private final String delimiter;
 
