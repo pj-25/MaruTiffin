@@ -22,21 +22,30 @@ MaruTiffin
 │   │   └── src
 │   │       ├── main
 │   │       │   ├── java
+│   │       │   │   ├── entities
+│   │       │   │   │   ├── Address.java
+│   │       │   │   │   ├── Admin.java
+│   │       │   │   │   ├── CartItem.java
+│   │       │   │   │   ├── Cart.java
+│   │       │   │   │   ├── Customer.java
+│   │       │   │   │   ├── DeliveryPerson.java
+│   │       │   │   │   ├── FoodItem.java
+│   │       │   │   │   ├── KitchenHolder.java
+│   │       │   │   │   ├── Kitchen.java
+│   │       │   │   │   ├── KitchenReview.java
+│   │       │   │   │   ├── MenuItem.java
+│   │       │   │   │   ├── Menu.java
+│   │       │   │   │   ├── Offer.java
+│   │       │   │   │   ├── OrderInfo.java
+│   │       │   │   │   ├── OrderIssue.java
+│   │       │   │   │   ├── Payment.java
+│   │       │   │   │   ├── SavedAddress.java
+│   │       │   │   │   ├── SavedAddressPK.java
+│   │       │   │   │   ├── ScheduledOrder.java
+│   │       │   │   │   └── User.java
+│   │       │   │   └── entityHandler
 │   │       │   └── resources
-│   │       └── test
-│   │           └── java
-│   ├── EventHandler
-│   │   └── src
-│   │       ├── main
-│   │       │   ├── java
-│   │       │   └── resources
-│   │       └── test
-│   │           └── java
-│   ├── MessageHandler
-│   │   └── src
-│   │       ├── main
-│   │       │   ├── java
-│   │       │   └── resources
+│   │       │       └── META-INF
 │   │       └── test
 │   │           └── java
 │   ├── NetworkConnection
@@ -44,8 +53,19 @@ MaruTiffin
 │   │   │   ├── main
 │   │   │   │   ├── java
 │   │   │   │   │   └── networkConnection
+│   │   │   │   │       ├── eventHandler
+│   │   │   │   │       │   ├── CustomEvent.java
+│   │   │   │   │       │   ├── EventHandler.java
+│   │   │   │   │       │   └── EventType.java
 │   │   │   │   │       ├── messageHandler
-│   │   │   │   │       │   └── MessageConsumer.java
+│   │   │   │   │       │   ├── MessageCode.java
+│   │   │   │   │       │   ├── MessageConsumer.java
+│   │   │   │   │       │   ├── MessageDelimiter.java
+│   │   │   │   │       │   ├── MessageFormatHandler.java
+│   │   │   │   │       │   └── MessageType.java
+│   │   │   │   │       ├── objectParser
+│   │   │   │   │       │   ├── ObjectParseException.java
+│   │   │   │   │       │   └── ObjectParser.java
 │   │   │   │   │       └── SocketConnection.java
 │   │   │   │   └── resources
 │   │   │   └── test
@@ -77,64 +97,65 @@ MaruTiffin
 │           └── generated-sources
 │               └── annotations
 ├── databaseAssets
-└── MaruTiffinApp
-    ├── ClientApp
-    │   ├── app
-    │   │   ├── libs
-    │   │   └── src
-    │   │       ├── androidTest
-    │   │       │   └── java
-    │   │       │       └── com
-    │   │       │           └── example
-    │   │       │               └── clientapp
-    │   │       │                   └── ExampleInstrumentedTest.java
-    │   │       ├── main
-    │   │       │   ├── java
-    │   │       │   │   └── com
-    │   │       │   │       └── example
-    │   │       │   │           └── clientapp
-    │   │       │   │               └── MainActivity.java
-    │   │       │   └── res
-    │   │       │       ├── drawable
-    │   │       │       ├── drawable-v24
-    │   │       │       ├── layout
-    │   │       │       ├── mipmap-anydpi-v26
-    │   │       │       ├── mipmap-hdpi
-    │   │       │       ├── mipmap-mdpi
-    │   │       │       ├── mipmap-xhdpi
-    │   │       │       ├── mipmap-xxhdpi
-    │   │       │       ├── mipmap-xxxhdpi
-    │   │       │       ├── values
-    │   │       │       └── values-night
-    │   │       └── test
-    │   │           └── java
-    │   │               └── com
-    │   │                   └── example
-    │   │                       └── clientapp
-    │   │                           └── ExampleUnitTest.java
-    │   └── gradle
-    │       └── wrapper
-    ├── libs
-    ├── ServerApp
-    │   └── src
-    │       ├── main
-    │       │   ├── java
-    │       │   │   ├── server
-    │       │   │   │   ├── RunServer.java
-    │       │   │   │   └── userConnection.java
-    │       │   │   └── services
-    │       │   │       ├── ServeRequest.java
-    │       │   │       └── ServiceHandler.java
-    │       │   └── resources
-    │       └── test
-    │           └── java
-    └── src
-        ├── main
-        │   ├── java
-        │   └── resources
-        └── test
-            └── java
+├── MaruTiffinApp
+│   ├── ClientApp
+│   │   ├── app
+│   │   │   ├── libs
+│   │   │   └── src
+│   │   │       ├── androidTest
+│   │   │       │   └── java
+│   │   │       │       └── com
+│   │   │       │           └── example
+│   │   │       │               └── clientapp
+│   │   │       │                   └── ExampleInstrumentedTest.java
+│   │   │       ├── main
+│   │   │       │   ├── java
+│   │   │       │   │   └── com
+│   │   │       │   │       └── example
+│   │   │       │   │           └── clientapp
+│   │   │       │   │               └── MainActivity.java
+│   │   │       │   └── res
+│   │   │       │       ├── drawable
+│   │   │       │       ├── drawable-v24
+│   │   │       │       ├── layout
+│   │   │       │       ├── mipmap-anydpi-v26
+│   │   │       │       ├── mipmap-hdpi
+│   │   │       │       ├── mipmap-mdpi
+│   │   │       │       ├── mipmap-xhdpi
+│   │   │       │       ├── mipmap-xxhdpi
+│   │   │       │       ├── mipmap-xxxhdpi
+│   │   │       │       ├── values
+│   │   │       │       └── values-night
+│   │   │       └── test
+│   │   │           └── java
+│   │   │               └── com
+│   │   │                   └── example
+│   │   │                       └── clientapp
+│   │   │                           └── ExampleUnitTest.java
+│   │   └── gradle
+│   │       └── wrapper
+│   ├── libs
+│   ├── ServerApp
+│   │   └── src
+│   │       ├── main
+│   │       │   ├── java
+│   │       │   │   ├── server
+│   │       │   │   │   ├── RunServer.java
+│   │       │   │   │   └── userConnection.java
+│   │       │   │   └── services
+│   │       │   │       ├── ServeRequest.java
+│   │       │   │       └── ServiceHandler.java
+│   │       │   └── resources
+│   │       └── test
+│   │           └── java
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   └── resources
+│       └── test
+│           └── java
+└── projectDiagrams
 
-118 directories, 13 files
+110 directories, 42 files
 ```
 ### [Jump to project Diagrams](https://pj-25.github.io/MaruTiffin/projectDiagrams/diagrams.html)
