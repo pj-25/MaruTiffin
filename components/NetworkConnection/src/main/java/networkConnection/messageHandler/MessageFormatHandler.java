@@ -1,7 +1,7 @@
 package networkConnection.messageHandler;
 
 
-import networkConnection.entityParser.EntityParser;
+import networkConnection.objectParser.ObjectParser;
 import networkConnection.eventHandler.EventType;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class MessageFormatHandler {
         return encode(DEFAULT_DELIMITER, msgType, msgData);
     }
 
-    public static String encode(ArrayList<? extends EntityParser> entities){
+    public static String encode(ArrayList<? extends ObjectParser> entities){
         if(entities!=null && entities.size()>0 ){
             StringBuilder bookingData = new StringBuilder(entities.get(0).toString());
             for(int i=1;i<entities.size();i++){
