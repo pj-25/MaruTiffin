@@ -137,3 +137,4 @@ MaruTiffin
 
 118 directories, 13 files
 ```
+### [Jump to project Diagrams](https://pj-25.github.io/MaruTiffin/projectDiagrams/diagrams.html)
