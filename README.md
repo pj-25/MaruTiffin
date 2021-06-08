@@ -1,7 +1,7 @@
 # Marutiffin
 
 ## Project Structure (Current)
-```bash
+```javascript
 MaruTiffin
 ├── components
 │   ├── constData
