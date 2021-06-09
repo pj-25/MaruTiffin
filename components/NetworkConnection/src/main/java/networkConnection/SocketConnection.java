@@ -7,7 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class SocketConnection {
+public class SocketConnection implements MessageConsumer {
 
     private String connectionID;
     private Socket socket;
@@ -21,6 +21,8 @@ public class SocketConnection {
         connect(socket);
         messageDecoder = msgDecoder;
     }
+
+    public SocketConnection(){}
 
     public SocketConnection(String connectionIP, int connectionPort, MessageConsumer msgDecoder) throws IOException{
         this(new Socket(connectionIP, connectionPort), msgDecoder);
@@ -39,13 +41,16 @@ public class SocketConnection {
     }
 
     public void run(){
-        try{
-            while(isConnected){
-                messageDecoder.consume(read());
+        new Thread(()->{
+            try{
+                while(isConnected){
+                    consume(read());
+                }
+            }catch(IOException e){
+                isConnected = false;
+                System.err.println(getConnectionID()+" disconnected!");
             }
-        }catch(IOException e){
-            System.err.println("Unable to read");
-        }
+        }).start();
     }
 
     public String read() throws IOException{
@@ -106,5 +111,12 @@ public class SocketConnection {
 
     public void setMessageDecoder(MessageConsumer messageDecoder) {
         this.messageDecoder = messageDecoder;
+    }
+
+    @Override
+    public void consume(String... msg) {
+        if(messageDecoder!=null){
+            messageDecoder.consume(msg);
+        }
     }
 }

@@ -4,7 +4,14 @@ import services.ServeRequest;
 
 import java.io.IOException;
 
-public class RunServer {
+public class MarutiffinServer extends Server {
+
+    public MarutiffinServer() throws IOException {
+        super();
+    }
+
+    public static Server marutiffinServer;
+
     public static void main(String []s){
         if(s.length > 1){
             System.err.println("Invalid number of arguments!");
@@ -18,6 +25,7 @@ public class RunServer {
             }else {
                 serverApp = new Server(new ServeRequest());
             }
+            setMarutiffinServer(serverApp);
             serverApp.start();
 
         }catch (IOException e){
@@ -27,4 +35,11 @@ public class RunServer {
         }
     }
 
+    public static Server getMarutiffinServer() {
+        return marutiffinServer;
+    }
+
+    public static void setMarutiffinServer(Server marutiffinServer) {
+        MarutiffinServer.marutiffinServer = marutiffinServer;
+    }
 }
