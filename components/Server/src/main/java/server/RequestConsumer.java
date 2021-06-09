@@ -1,7 +1,5 @@
 package server;
 
-import networkConnection.messageHandler.MessageConsumer;
-
-public interface RequestConsumer extends MessageConsumer {
+public interface RequestConsumer {
     void setResponse(String msg);
 }

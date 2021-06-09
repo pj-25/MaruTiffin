@@ -41,10 +41,15 @@ public class SocketConnection implements MessageConsumer {
     }
 
     public void run(){
+        run(this.messageDecoder);
+    }
+
+    public void run(MessageConsumer msgDecoder){
         new Thread(()->{
+            isConnected = true;
             try{
                 while(isConnected){
-                    accept(read());
+                    msgDecoder.accept(read());
                 }
             }catch(IOException e){
                 isConnected = false;
@@ -66,7 +71,7 @@ public class SocketConnection implements MessageConsumer {
     }
 
     public String getConnectionID() {
-        return connectionID;
+        return this.connectionID != null ? this.connectionID : "anonymous";
     }
 
     public void setConnectionID(String connectionID) {
@@ -77,8 +82,8 @@ public class SocketConnection implements MessageConsumer {
         return socket;
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
+    public void setSocket(Socket socket) throws IOException {
+        connect(socket);
     }
 
     public DataOutputStream getDataOutputStream() {

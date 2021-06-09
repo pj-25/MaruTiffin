@@ -1,6 +1,7 @@
 package server;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -8,17 +9,32 @@ public class Server implements ServeClient {
     public final static int DEFAULT_SERVER_PORT = 5656;     //Default port number
 
     private ServerSocket serverSocket;
-
     private ServeClient serveClient;
 
-    private ClientConnectionsHandler clientConnectionsHandler;
+    private Class<? extends RequestManager> requestHandler;
+
     private boolean isRunning = false;
 
-    public Server(int serverPort, RequestConsumer requestConsumer) throws IOException {
+    public Server(int serverPort, Class<? extends RequestManager> requestHandler) throws IOException {
         this(serverPort,socket-> {
-            RequestHandler requestHandler = new RequestHandler(socket, requestConsumer);
-            requestHandler.run();
+            try{
+                RequestManager requestManagerObj =  createRequestHandler(requestHandler);
+                requestManagerObj.connect(socket);
+                requestManagerObj.run();
+            }catch (RequestHandlerNotFound requestHandlerNotFound){
+                requestHandlerNotFound.printStackTrace();
+                System.exit(0);
+            }
         });
+        this.requestHandler = requestHandler;
+    }
+
+    static public RequestManager createRequestHandler(Class< ? extends RequestManager> requestHandler) throws RequestHandlerNotFound{
+        try {
+            return requestHandler.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RequestHandlerNotFound(e.getMessage());
+        }
     }
 
     public Server(int serverPort) throws IOException{
@@ -29,14 +45,13 @@ public class Server implements ServeClient {
         this(DEFAULT_SERVER_PORT, (ServeClient) null);
     }
 
-    public Server(RequestConsumer requestConsumer) throws IOException{
-        this(DEFAULT_SERVER_PORT, requestConsumer);
+    public Server(Class<? extends RequestManager> requestHandler) throws IOException{
+        this(DEFAULT_SERVER_PORT, requestHandler);
     }
 
     public Server(int serverPort, ServeClient serveClient) throws IOException{
         serverSocket = new ServerSocket(serverPort);
         this.serveClient = serveClient;
-        clientConnectionsHandler = new ClientConnectionsHandler();
     }
 
     public static int getDefaultServerPort() {
@@ -51,14 +66,6 @@ public class Server implements ServeClient {
         this.serverSocket = serverSocket;
     }
 
-    public ClientConnectionsHandler getClientConnectionsHandler() {
-        return clientConnectionsHandler;
-    }
-
-    public void setClientConnectionsHandler(ClientConnectionsHandler ccHandler) {
-        clientConnectionsHandler = ccHandler;
-    }
-
     public boolean isRunning() {
         return isRunning;
     }
@@ -67,6 +74,13 @@ public class Server implements ServeClient {
         isRunning = running;
     }
 
+    public Class<? extends RequestManager> getRequestHandler() {
+        return requestHandler;
+    }
+
+    public void setRequestHandler(Class<? extends RequestManager> requestHandler) {
+        this.requestHandler = requestHandler;
+    }
 
     public ServeClient getServeClient() {
         return serveClient;
@@ -93,7 +107,6 @@ public class Server implements ServeClient {
 
     public void close(){
         try{
-            clientConnectionsHandler.closeAll();
             serverSocket.close();
             isRunning = false;
             System.out.println("Server closed successfully!");
@@ -107,6 +120,7 @@ public class Server implements ServeClient {
         if(serveClient!=null){
             new Thread(()->{
                 try {
+                    System.out.println("Socket accepted: "+socket);
                     serveClient.serve(socket);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -115,4 +129,9 @@ public class Server implements ServeClient {
         }
     }
 
+    public static class RequestHandlerNotFound extends Exception{
+        public RequestHandlerNotFound(String errorMsg){
+            super(errorMsg);
+        }
+    }
 }

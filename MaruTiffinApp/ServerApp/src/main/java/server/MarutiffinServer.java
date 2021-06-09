@@ -21,9 +21,9 @@ public class MarutiffinServer extends Server {
 
             Server serverApp;
             if(s.length == 1){
-                serverApp = new Server(Integer.parseInt(s[0]), new ServeRequest());
+                serverApp = new Server(Integer.parseInt(s[0]), ServeRequest.class);
             }else {
-                serverApp = new Server(new ServeRequest());
+                serverApp = new Server(ServeRequest.class);
             }
             setMarutiffinServer(serverApp);
             serverApp.start();
