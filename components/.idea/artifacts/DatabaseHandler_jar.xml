@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="DatabaseHandler:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/DatabaseHandler_jar</output-path>
+    <output-path>$PROJECT_DIR$/../MaruTiffinApp/libs</output-path>
     <root id="archive" name="DatabaseHandler.jar">
       <element id="module-output" name="DatabaseHandler" />
     </root>

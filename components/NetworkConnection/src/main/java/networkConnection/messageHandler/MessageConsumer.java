@@ -1,6 +1,7 @@
 package networkConnection.messageHandler;
 
+import java.util.function.Consumer;
+
 @FunctionalInterface
-public interface MessageConsumer {
-    void consume(String ...msg);
+public interface MessageConsumer extends Consumer<String> {
 }

@@ -1,44 +1,37 @@
 package server;
 
 import networkConnection.SocketConnection;
-import networkConnection.messageHandler.MessageConsumer;
 
 import java.io.IOException;
 import java.net.Socket;
 
 
-public class ServiceProvider extends SocketConnection implements RequestConsumer {
+class RequestHandler extends SocketConnection implements RequestConsumer{
 
-    private RequestConsumer requestConsumer;
     private String response;
-    private boolean sendResponse = false;
+    private boolean hasResponse = false;
 
-    public ServiceProvider(Socket socket, MessageConsumer msgDecoder, RequestConsumer requestConsumer) throws IOException {
-        super(socket, msgDecoder);
-        this.requestConsumer = requestConsumer;
-    }
-
-    public ServiceProvider(String connectionIP, int connectionPort, MessageConsumer msgDecoder, RequestConsumer requestConsumer) throws IOException {
-        super(connectionIP, connectionPort, msgDecoder);
-        this.requestConsumer = requestConsumer;
-    }
-
-    public ServiceProvider(String connectionID, Socket socket, MessageConsumer msgDecoder, RequestConsumer requestConsumer) throws IOException {
-        super(connectionID, socket, msgDecoder);
-        this.requestConsumer = requestConsumer;
+    public RequestHandler(Socket socket, RequestConsumer requestConsumer) throws IOException {
+        super(socket, requestConsumer);
     }
 
     @Override
-    public void consume(String... req) {
-        requestConsumer.consume();
-        if(sendResponse){
-            write(response);
-            sendResponse = false;
-        }
+    public void accept(String msg) {
+        getMessageDecoder().andThen(s -> {
+            if(hasResponse){
+                write(getResponse());
+                hasResponse = false;
+            }
+        }).accept(msg);
     }
 
-    public void setResponse(String response) {
-        sendResponse = true;
+    public String getResponse() {
+        return response;
+    }
+
+    @Override
+    final public void setResponse(String response) {
+        hasResponse = true;
         this.response = response;
     }
 }

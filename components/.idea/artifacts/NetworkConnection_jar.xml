@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="NetworkConnection:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/NetworkConnection_jar</output-path>
+    <output-path>$PROJECT_DIR$/../MaruTiffinApp/libs</output-path>
     <root id="archive" name="NetworkConnection.jar">
       <element id="module-output" name="NetworkConnection" />
     </root>

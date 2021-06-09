@@ -1,49 +1,46 @@
 package server;
 
-import networkConnection.SocketConnection;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server implements RequestHandler, ServeClient {
-    public final static int SERVER_PORT = 5656;     //Default port number
+public class Server implements ServeClient {
+    public final static int DEFAULT_SERVER_PORT = 5656;     //Default port number
 
     private ServerSocket serverSocket;
-    private RequestHandler requestHandler;
+
     private ServeClient serveClient;
 
     private ClientConnectionsHandler clientConnectionsHandler;
     private boolean isRunning = false;
 
-    public Server(int serverPort, RequestHandler requestHandler) throws IOException {
-        this(serverPort, socket -> {
-            SocketConnection socketConnection = new SocketConnection(socket, requestHandler);
-            socketConnection.run();
-        }, requestHandler);
+    public Server(int serverPort, RequestConsumer requestConsumer) throws IOException {
+        this(serverPort,socket-> {
+            RequestHandler requestHandler = new RequestHandler(socket, requestConsumer);
+            requestHandler.run();
+        });
     }
 
     public Server(int serverPort) throws IOException{
-        this(serverPort, null);
-    }
-
-    public Server(RequestHandler requestHandler) throws IOException{
-        this(SERVER_PORT, requestHandler);
+        this(serverPort, (ServeClient) null);
     }
 
     public Server() throws IOException{
-        this(SERVER_PORT, null);
+        this(DEFAULT_SERVER_PORT, (ServeClient) null);
     }
 
-    public Server(int serverPort, ServeClient serveClient, RequestHandler requestHandler) throws IOException{
+    public Server(RequestConsumer requestConsumer) throws IOException{
+        this(DEFAULT_SERVER_PORT, requestConsumer);
+    }
+
+    public Server(int serverPort, ServeClient serveClient) throws IOException{
         serverSocket = new ServerSocket(serverPort);
         this.serveClient = serveClient;
-        this.requestHandler = requestHandler;
         clientConnectionsHandler = new ClientConnectionsHandler();
     }
 
-    public static int getServerPort() {
-        return SERVER_PORT;
+    public static int getDefaultServerPort() {
+        return DEFAULT_SERVER_PORT;
     }
 
     public ServerSocket getServerSocket() {
@@ -70,13 +67,6 @@ public class Server implements RequestHandler, ServeClient {
         isRunning = running;
     }
 
-    public RequestHandler getRequestHandler() {
-        return requestHandler;
-    }
-
-    public void setRequestHandler(RequestHandler requestHandler) {
-        this.requestHandler = requestHandler;
-    }
 
     public ServeClient getServeClient() {
         return serveClient;
@@ -87,7 +77,7 @@ public class Server implements RequestHandler, ServeClient {
     }
 
     public void start(){
-        System.out.println("Server started on "+getServerPort());
+        System.out.println("Server started on "+ getDefaultServerPort());
         isRunning = true;
         while(isRunning){
             try{
@@ -103,6 +93,7 @@ public class Server implements RequestHandler, ServeClient {
 
     public void close(){
         try{
+            clientConnectionsHandler.closeAll();
             serverSocket.close();
             isRunning = false;
             System.out.println("Server closed successfully!");
@@ -124,10 +115,4 @@ public class Server implements RequestHandler, ServeClient {
         }
     }
 
-    @Override
-    public void consume(String... data) {
-        if(requestHandler != null){
-            requestHandler.consume(data);
-        }
-    }
 }

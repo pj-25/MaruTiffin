@@ -44,7 +44,7 @@ public class SocketConnection implements MessageConsumer {
         new Thread(()->{
             try{
                 while(isConnected){
-                    consume(read());
+                    accept(read());
                 }
             }catch(IOException e){
                 isConnected = false;
@@ -113,10 +113,9 @@ public class SocketConnection implements MessageConsumer {
         this.messageDecoder = messageDecoder;
     }
 
-    @Override
-    public void consume(String... msg) {
+    public void accept(String msg) {
         if(messageDecoder!=null){
-            messageDecoder.consume(msg);
+            messageDecoder.accept(msg);
         }
     }
 }
