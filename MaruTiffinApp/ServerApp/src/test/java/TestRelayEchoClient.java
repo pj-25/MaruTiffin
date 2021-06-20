@@ -1,10 +1,9 @@
 import networkConnection.SocketConnection;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Scanner;
 
-public class TestRelayPingClient {
+public class TestRelayEchoClient {
     static public Scanner scanner = new Scanner(System.in);
     public static void main(String []s){
         String msg = "";

@@ -4,8 +4,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/EntityHandler/pom.xml" />
-        <option value="$PROJECT_DIR$/Server/pom.xml" />
-        <option value="$PROJECT_DIR$/NetworkConnection/pom.xml" />
         <option value="$PROJECT_DIR$/DatabaseHandler/pom.xml" />
         <option value="$PROJECT_DIR$/constData/pom.xml" />
       </list>
