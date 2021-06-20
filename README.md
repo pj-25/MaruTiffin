@@ -1,5 +1,10 @@
 # Marutiffin
 
+
+![IDE](https://img.shields.io/badge/IDE-IntellijIDEA-blueviolet)
+
+![COMMIT_STATUS](https://img.shields.io/github/last-commit/pj-25/MaruTiffin?style=for-the-badge)
+
 ## Project Structure (Current)
 ```javascript
 MaruTiffin
